@@ -16,5 +16,16 @@ namespace ExpenseTracker
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Users user = new Users();
+            user.username = "test";
+            user.password = "test";
+
+            ExpenseTrackerDBEntities et = new ExpenseTrackerDBEntities();
+            et.Users.Add(user);
+            et.SaveChanges();
+        }
     }
 }
