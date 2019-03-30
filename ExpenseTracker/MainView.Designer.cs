@@ -28,97 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTransactions = new System.Windows.Forms.Button();
+            this.btnPredictions = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
+            this.btnWeeklyView = new System.Windows.Forms.Button();
+            this.btnContacts = new System.Windows.Forms.Button();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // button1
+            // btnTransactions
             // 
-            this.button1.Location = new System.Drawing.Point(12, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Transactions";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnTransactions.Location = new System.Drawing.Point(12, 15);
+            this.btnTransactions.Name = "btnTransactions";
+            this.btnTransactions.Size = new System.Drawing.Size(124, 41);
+            this.btnTransactions.TabIndex = 0;
+            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.UseVisualStyleBackColor = true;
+            this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
-            // button2
+            // btnPredictions
             // 
-            this.button2.Location = new System.Drawing.Point(152, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 41);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Predictions View";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnPredictions.Location = new System.Drawing.Point(152, 15);
+            this.btnPredictions.Name = "btnPredictions";
+            this.btnPredictions.Size = new System.Drawing.Size(124, 41);
+            this.btnPredictions.TabIndex = 1;
+            this.btnPredictions.Text = "Predictions View";
+            this.btnPredictions.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnReports
             // 
-            this.button3.Location = new System.Drawing.Point(292, 15);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 41);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Reports View";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnReports.Location = new System.Drawing.Point(292, 15);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(124, 41);
+            this.btnReports.TabIndex = 2;
+            this.btnReports.Text = "Reports View";
+            this.btnReports.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnWeeklyView
             // 
-            this.button4.Location = new System.Drawing.Point(432, 15);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(124, 41);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Weekly View";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnWeeklyView.Location = new System.Drawing.Point(432, 15);
+            this.btnWeeklyView.Name = "btnWeeklyView";
+            this.btnWeeklyView.Size = new System.Drawing.Size(124, 41);
+            this.btnWeeklyView.TabIndex = 3;
+            this.btnWeeklyView.Text = "Weekly View";
+            this.btnWeeklyView.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnContacts
             // 
-            this.button5.Location = new System.Drawing.Point(572, 15);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(124, 41);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Contacts";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnContacts.Location = new System.Drawing.Point(572, 15);
+            this.btnContacts.Name = "btnContacts";
+            this.btnContacts.Size = new System.Drawing.Size(124, 41);
+            this.btnContacts.TabIndex = 4;
+            this.btnContacts.Text = "Contacts";
+            this.btnContacts.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // pnlMain
             // 
-            this.panel1.Location = new System.Drawing.Point(12, 72);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1140, 521);
-            this.panel1.TabIndex = 5;
+            this.pnlMain.Location = new System.Drawing.Point(12, 72);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(1140, 521);
+            this.pnlMain.TabIndex = 5;
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1164, 605);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.btnContacts);
+            this.Controls.Add(this.btnWeeklyView);
+            this.Controls.Add(this.btnReports);
+            this.Controls.Add(this.btnPredictions);
+            this.Controls.Add(this.btnTransactions);
             this.Name = "MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
-            this.Load += new System.EventHandler(this.MainView_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnTransactions;
+        private System.Windows.Forms.Button btnPredictions;
+        private System.Windows.Forms.Button btnReports;
+        private System.Windows.Forms.Button btnWeeklyView;
+        private System.Windows.Forms.Button btnContacts;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

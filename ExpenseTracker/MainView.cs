@@ -12,39 +12,21 @@ namespace ExpenseTracker
 {
     public partial class MainView : Form
     {
-        public MainView()
+        private User user;
+
+        public MainView(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnTransactions_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
+            TransactionForm transactionForm=new TransactionForm();
+            transactionForm.TopLevel = false;
+            transactionForm.AutoScroll = true;
+            this.pnlMain.Controls.Add(transactionForm);
+            transactionForm.Show();
         }
     }
 }

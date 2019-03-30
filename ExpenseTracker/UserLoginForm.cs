@@ -12,7 +12,6 @@ namespace ExpenseTracker
 {
     public partial class UserLoginForm : Form
     {
-        MainView mainView = new MainView();
         public UserLoginForm()
         {
             InitializeComponent();
@@ -25,9 +24,10 @@ namespace ExpenseTracker
             String username = txtUsername.Text;
             String password = txtPassword.Text;
             UserController userController = new UserController();
-            bool isUserEnable = userController.VerifyLogin(username, password);
-            if (isUserEnable)
+            User user = userController.VerifyLogin(username, password);
+            if (user != null)
             {
+                MainView mainView = new MainView(user);
                 mainView.Show();
                 this.Hide();
             }
