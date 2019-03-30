@@ -4,8 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="66002c56437f4e319bf711933c17d741" Name="Diagram1" >
-        <EntityTypeShape EntityType="ExpenseTrackerDBModel.Users" Width="1.5" PointX="8.125" PointY="1.375" />
+      <Diagram DiagramId="0a4b026cfc3241d68efe7bf6f01619cf" Name="Diagram1">
+        <EntityTypeShape EntityType="ExpenseTrackerDBModel.Transaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpenseTrackerDBModel.User" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="ExpenseTrackerDBModel.FK_UsersTransactions" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
