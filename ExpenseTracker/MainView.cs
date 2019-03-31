@@ -12,12 +12,12 @@ namespace ExpenseTracker
 {
     public partial class MainView : Form
     {
-        private User user;
+        public static User user;
 
         public MainView(User user)
         {
             InitializeComponent();
-            this.user = user;
+            MainView.user = user;
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)

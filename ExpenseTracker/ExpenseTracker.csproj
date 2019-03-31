@@ -75,6 +75,7 @@
     <Compile Include="Transaction.cs">
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TransactionController.cs" />
     <Compile Include="TransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
