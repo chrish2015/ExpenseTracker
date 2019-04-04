@@ -34,6 +34,7 @@
             this.btnWeeklyView = new System.Windows.Forms.Button();
             this.btnContacts = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTransactions
@@ -52,7 +53,7 @@
             this.btnPredictions.Name = "btnPredictions";
             this.btnPredictions.Size = new System.Drawing.Size(124, 41);
             this.btnPredictions.TabIndex = 1;
-            this.btnPredictions.Text = "Predictions View";
+            this.btnPredictions.Text = "Predictions";
             this.btnPredictions.UseVisualStyleBackColor = true;
             // 
             // btnReports
@@ -61,7 +62,7 @@
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(124, 41);
             this.btnReports.TabIndex = 2;
-            this.btnReports.Text = "Reports View";
+            this.btnReports.Text = "Reports";
             this.btnReports.UseVisualStyleBackColor = true;
             // 
             // btnWeeklyView
@@ -72,6 +73,7 @@
             this.btnWeeklyView.TabIndex = 3;
             this.btnWeeklyView.Text = "Weekly View";
             this.btnWeeklyView.UseVisualStyleBackColor = true;
+            this.btnWeeklyView.Click += new System.EventHandler(this.btnWeeklyView_Click);
             // 
             // btnContacts
             // 
@@ -89,11 +91,21 @@
             this.pnlMain.Size = new System.Drawing.Size(1140, 521);
             this.pnlMain.TabIndex = 5;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(712, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 41);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Events";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1164, 605);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.btnContacts);
             this.Controls.Add(this.btnWeeklyView);
@@ -115,5 +127,6 @@
         private System.Windows.Forms.Button btnWeeklyView;
         private System.Windows.Forms.Button btnContacts;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2019 18:42:45
+-- Date Created: 04/04/2019 15:09:20
 -- Generated from EDMX file: C:\Applications\Projects\ExpenseTracker\ExpenseTracker\ExpenseTrackerModel.edmx
 -- --------------------------------------------------
 

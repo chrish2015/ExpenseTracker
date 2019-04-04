@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridTransactions = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -44,23 +44,42 @@
             this.datePickerTransactions = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlRecurring = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbtNo = new System.Windows.Forms.RadioButton();
+            this.rbtYes = new System.Windows.Forms.RadioButton();
             this.pnlType = new System.Windows.Forms.Panel();
-            this.btnExpense = new System.Windows.Forms.RadioButton();
             this.btnIncome = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnExpense = new System.Windows.Forms.RadioButton();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isRecurring = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTransactions)).BeginInit();
             this.pnlRecurring.SuspendLayout();
             this.pnlType.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridTransactions
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(373, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(739, 458);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridTransactions.AllowUserToDeleteRows = false;
+            this.dataGridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.name,
+            this.date,
+            this.value,
+            this.transactionType,
+            this.description,
+            this.isRecurring});
+            this.dataGridTransactions.Location = new System.Drawing.Point(337, 12);
+            this.dataGridTransactions.Name = "dataGridTransactions";
+            this.dataGridTransactions.ReadOnly = true;
+            this.dataGridTransactions.Size = new System.Drawing.Size(791, 497);
+            this.dataGridTransactions.TabIndex = 0;
+            this.dataGridTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTransactions_CellContentClick);
+            this.dataGridTransactions.DoubleClick += new System.EventHandler(this.dataGridTransactions_DoubleClick);
             // 
             // label1
             // 
@@ -104,6 +123,8 @@
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(236, 20);
             this.txtValue.TabIndex = 8;
+            this.txtValue.Validating += new System.ComponentModel.CancelEventHandler(this.txtValue_Validating);
+            this.txtValue.Validated += new System.EventHandler(this.txtValue_Validated);
             // 
             // label4
             // 
@@ -156,7 +177,7 @@
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 13;
-            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.Text = "Save";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
@@ -187,36 +208,36 @@
             // 
             // pnlRecurring
             // 
-            this.pnlRecurring.Controls.Add(this.radioButton2);
-            this.pnlRecurring.Controls.Add(this.radioButton1);
+            this.pnlRecurring.Controls.Add(this.rbtNo);
+            this.pnlRecurring.Controls.Add(this.rbtYes);
             this.pnlRecurring.Controls.Add(this.label6);
             this.pnlRecurring.Location = new System.Drawing.Point(29, 263);
             this.pnlRecurring.Name = "pnlRecurring";
             this.pnlRecurring.Size = new System.Drawing.Size(289, 100);
             this.pnlRecurring.TabIndex = 22;
             // 
-            // radioButton1
+            // rbtNo
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(73, 58);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(43, 17);
-            this.radioButton1.TabIndex = 17;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yes";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbtNo.AutoSize = true;
+            this.rbtNo.Location = new System.Drawing.Point(204, 58);
+            this.rbtNo.Name = "rbtNo";
+            this.rbtNo.Size = new System.Drawing.Size(39, 17);
+            this.rbtNo.TabIndex = 18;
+            this.rbtNo.TabStop = true;
+            this.rbtNo.Text = "No";
+            this.rbtNo.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbtYes
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(189, 58);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(39, 17);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "No";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbtYes.AutoSize = true;
+            this.rbtYes.Checked = true;
+            this.rbtYes.Location = new System.Drawing.Point(73, 58);
+            this.rbtYes.Name = "rbtYes";
+            this.rbtYes.Size = new System.Drawing.Size(43, 17);
+            this.rbtYes.TabIndex = 17;
+            this.rbtYes.TabStop = true;
+            this.rbtYes.Text = "Yes";
+            this.rbtYes.UseVisualStyleBackColor = true;
             // 
             // pnlType
             // 
@@ -226,6 +247,16 @@
             this.pnlType.Name = "pnlType";
             this.pnlType.Size = new System.Drawing.Size(236, 41);
             this.pnlType.TabIndex = 23;
+            // 
+            // btnIncome
+            // 
+            this.btnIncome.AutoSize = true;
+            this.btnIncome.Location = new System.Drawing.Point(161, 12);
+            this.btnIncome.Name = "btnIncome";
+            this.btnIncome.Size = new System.Drawing.Size(60, 17);
+            this.btnIncome.TabIndex = 1;
+            this.btnIncome.Text = "Income";
+            this.btnIncome.UseVisualStyleBackColor = true;
             // 
             // btnExpense
             // 
@@ -239,21 +270,62 @@
             this.btnExpense.Text = "Expense";
             this.btnExpense.UseVisualStyleBackColor = true;
             // 
-            // btnIncome
+            // Id
             // 
-            this.btnIncome.AutoSize = true;
-            this.btnIncome.Location = new System.Drawing.Point(161, 12);
-            this.btnIncome.Name = "btnIncome";
-            this.btnIncome.Size = new System.Drawing.Size(60, 17);
-            this.btnIncome.TabIndex = 1;
-            this.btnIncome.Text = "Income";
-            this.btnIncome.UseVisualStyleBackColor = true;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // date
+            // 
+            this.date.DataPropertyName = "date";
+            this.date.HeaderText = "Date";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            // 
+            // value
+            // 
+            this.value.DataPropertyName = "value";
+            this.value.HeaderText = "Value";
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            // 
+            // transactionType
+            // 
+            this.transactionType.DataPropertyName = "transactionType";
+            this.transactionType.HeaderText = "Transaction Type";
+            this.transactionType.Name = "transactionType";
+            this.transactionType.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = "Description";
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // isRecurring
+            // 
+            this.isRecurring.DataPropertyName = "isRecurring";
+            this.isRecurring.HeaderText = "Is Recurring";
+            this.isRecurring.Name = "isRecurring";
+            this.isRecurring.ReadOnly = true;
             // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 482);
+            this.ClientSize = new System.Drawing.Size(1140, 521);
             this.ControlBox = false;
             this.Controls.Add(this.pnlType);
             this.Controls.Add(this.pnlRecurring);
@@ -270,12 +342,12 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridTransactions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TransactionForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.TransactionForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTransactions)).EndInit();
             this.pnlRecurring.ResumeLayout(false);
             this.pnlRecurring.PerformLayout();
             this.pnlType.ResumeLayout(false);
@@ -287,7 +359,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridTransactions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtName;
@@ -303,10 +375,17 @@
         private System.Windows.Forms.DateTimePicker datePickerTransactions;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel pnlRecurring;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbtNo;
+        private System.Windows.Forms.RadioButton rbtYes;
         private System.Windows.Forms.Panel pnlType;
         private System.Windows.Forms.RadioButton btnIncome;
         private System.Windows.Forms.RadioButton btnExpense;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isRecurring;
     }
 }

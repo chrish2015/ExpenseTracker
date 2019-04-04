@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace ExpenseTracker
 
         private void TransactionForm_Load(object sender, EventArgs e)
         {
+            PopulateTransactionsDataGridView();
             Clear();
         }
 
@@ -53,16 +55,102 @@ namespace ExpenseTracker
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            String name = txtName.Text;
-            int value= Int32.Parse(txtValue.Text);
-            String description = txtDescription.Text;
-            System.DateTime dateTime = datePickerTransactions.Value;
+            var name = txtName.Text;
+            var value = Int32.Parse(txtValue.Text);
+            var description = txtDescription.Text;
+            var dateTime = datePickerTransactions.Value;
 
-            RadioButton checkedType = pnlType.Controls.OfType<RadioButton>()
+            var checkedType = pnlType.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
-            RadioButton checkedRecurringOption = pnlRecurring.Controls.OfType<RadioButton>()
+            var checkedRecurringOption = pnlRecurring.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
-            transactionController.Save(name,value,description,dateTime,checkedType,checkedRecurringOption);
+            transactionController.Save(name, value, description, dateTime, checkedType, checkedRecurringOption);
+            PopulateTransactionsDataGridView();
+
         }
+
+        private void txtValue_Validating(object sender, CancelEventArgs e)
+        {
+            string value;
+            NumberStyles style;
+            CultureInfo culture;
+            decimal currency;
+
+            value = txtValue.Text;
+            style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+            culture = CultureInfo.CreateSpecificCulture("en-US");
+            if (!Decimal.TryParse(value, style, culture, out currency))
+            {
+                MessageBox.Show("Please enter a valid currency amount.", "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // prevent the textbox from losing focus
+                e.Cancel = true;
+            }
+        }
+
+        private void txtValue_Validated(object sender, EventArgs e)
+        {
+            string input = txtValue.Text.Trim();
+            if (input.StartsWith("$"))
+            {
+                string temp = input.Replace("$", "");
+                string specifier = "C";
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                txtValue.Text = Decimal.Parse(temp).ToString(specifier, culture);
+            }
+        }
+
+        void PopulateTransactionsDataGridView()
+        {
+            dataGridTransactions.AutoGenerateColumns = false;
+            using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
+            {
+                dataGridTransactions.DataSource = dbEntities.Transactions.ToList<Transaction>();
+
+            }
+        }
+
+        private void dataGridTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridTransactions_DoubleClick(object sender, EventArgs e)
+        {
+            Transaction transaction = new Transaction();
+            if (dataGridTransactions.CurrentRow.Index != -1)
+            {
+                transaction.Id = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["id"].Value);
+                using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
+                {
+                    transaction = transactionController.getTransaction(dbEntities, transaction);
+                    txtName                            .Text = transaction.name;
+                    txtDescription                     .Text = transaction.description;
+                    txtValue                           .Text = transaction.value.ToString();
+                    if (transaction                    .isRecurring == "Yes")
+                    {
+                        rbtYes.Checked = true;
+                    }
+                    else
+                    {
+                        rbtNo.Checked = true;
+                    }
+
+                    if (transaction.transactionType == "Income")
+                    {
+                        btnIncome.Checked = true;
+                    }
+                    else if (transaction.transactionType == "Expense")
+                    {
+                        btnExpense.Checked = true;
+                    }
+
+                    btnSubmit.Text = "Update";
+                    btnDelete.Enabled = true;
+                }
+
+            }
+        }
+
+
     }
 }

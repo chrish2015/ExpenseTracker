@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0a4b026cfc3241d68efe7bf6f01619cf" Name="Diagram1">
-        <EntityTypeShape EntityType="ExpenseTrackerDBModel.Transaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpenseTrackerDBModel.Transaction" Width="1.5" PointX="4" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ExpenseTrackerDBModel.User" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="ExpenseTrackerDBModel.FK_UsersTransactions" ManuallyRouted="false" />
       </Diagram>

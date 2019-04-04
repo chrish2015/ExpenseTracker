@@ -4,39 +4,39 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExpenseTrackerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="ExpenseTrackerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
   <EntityContainer Name="ExpenseTrackerDBModelStoreContainer">
-    <EntitySet Name="Transactions" EntityType="ExpenseTrackerDBModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="ExpenseTrackerDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transactions" EntityType="ExpenseTrackerDBModel.Store.Transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="ExpenseTrackerDBModel.Store.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_UsersTransactions" Association="ExpenseTrackerDBModel.Store.FK_UsersTransactions">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Transactions" EntitySet="Transactions" />
+      <End EntitySet="Users" Role="Users" />
+      <End EntitySet="Transactions" Role="Transactions" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="date" Type="datetime" Nullable="false" />
-    <Property Name="value" Type="int" Nullable="false" />
-    <Property Name="transactionType" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="isRecurring" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UsersId" Type="int" Nullable="false" />
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="name" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="date" Nullable="false" Type="datetime" />
+    <Property Name="value" Nullable="false" Type="int" />
+    <Property Name="transactionType" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="description" Nullable="true" Type="nvarchar(max)" />
+    <Property Name="isRecurring" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="UsersId" Nullable="false" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="username" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="password" Nullable="false" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK_UsersTransactions">
-    <End Role="Users" Type="ExpenseTrackerDBModel.Store.Users" Multiplicity="1" />
-    <End Role="Transactions" Type="ExpenseTrackerDBModel.Store.Transactions" Multiplicity="*" />
+    <End Type="ExpenseTrackerDBModel.Store.Users" Multiplicity="1" Role="Users" />
+    <End Type="ExpenseTrackerDBModel.Store.Transactions" Multiplicity="*" Role="Transactions" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -58,9 +58,9 @@
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="value" Type="Int32" Nullable="false" />
-          <Property Name="transactionType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="transactionType" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isRecurring" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isRecurring" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
           <Property Name="UsersId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_UsersTransactions" FromRole="Transactions" ToRole="Users" />
         </EntityType>
@@ -98,7 +98,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ExpenseTrackerDBModelStoreContainer" CdmEntityContainer="ExpenseTrackerDBEntities">
+  <EntityContainerMapping CdmEntityContainer="ExpenseTrackerDBEntities" StorageEntityContainer="ExpenseTrackerDBModelStoreContainer">
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="IsTypeOf(ExpenseTrackerDBModel.Transaction)">
         <MappingFragment StoreEntitySet="Transactions">
