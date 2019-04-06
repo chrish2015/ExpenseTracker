@@ -119,6 +119,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.btnExitProgram_Click);
+            this.Load += new System.EventHandler(this.MainView_Load);
             this.ResumeLayout(false);
 
         }

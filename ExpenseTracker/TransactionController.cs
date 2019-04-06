@@ -25,10 +25,10 @@ namespace ExpenseTracker
                     transactionName = transactionName,
                     description = description,
                     value = value,
-                    transactionType= checkedType.Text,
+                    transactionType = checkedType.Text,
                     isRecurring = checkedRecurringOption.Text,
                     Contact = contact
-                    
+
                 });
                 dbEntities.SaveChanges();
             }
@@ -38,5 +38,27 @@ namespace ExpenseTracker
         {
             return dbEntities.Transactions.Where(x => x.transactionId == transaction.transactionId).FirstOrDefault();
         }
+
+        public List<dynamic> getWeeklyExpenses()
+        {
+            using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
+            {
+                var dateTime = DateTime.Now.AddDays(-7);
+                var todayDateTime = DateTime.Now;
+                return dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime).ToList<dynamic>();
+
+            }
+        }
+        public List<Transaction> getMonthlyExpenses()
+        {
+            using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
+            {
+                var dateTime = DateTime.Now.AddDays(-31);
+                var todayDateTime = DateTime.Now;
+                return dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime ).ToList<Transaction>();
+
+            }
+        }
     }
+
 }

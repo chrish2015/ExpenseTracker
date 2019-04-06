@@ -62,6 +62,7 @@
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactsController.cs" />
+    <Compile Include="EventController.cs" />
     <Compile Include="EventView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +84,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExpenseTrackerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PredictionController.cs" />
     <Compile Include="PredictionsForm.cs">
       <SubType>Form</SubType>
     </Compile>

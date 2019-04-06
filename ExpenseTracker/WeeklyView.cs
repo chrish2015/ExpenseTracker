@@ -12,6 +12,8 @@ namespace ExpenseTracker
 {
     public partial class WeeklyView : Form
     {
+        EventController eventController = new EventController();
+        TransactionController transactionController = new TransactionController();
         public WeeklyView()
         {
             InitializeComponent();
@@ -20,19 +22,17 @@ namespace ExpenseTracker
         public void PopulateTransactionsDataGridView()
         {
             dataGridWeeklyView.AutoGenerateColumns = false;
-            using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
-            {
-                var dateTime = DateTime.Now.AddDays(-7);
-                var todayDateTime = DateTime.Now;
-                dataGridWeeklyView.DataSource =
-                    dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime).ToList();
+            dataGridWeeklyView.DataSource = transactionController.getWeeklyExpenses();
 
-            }
+            dataGridEventsWeely.AutoGenerateColumns = false;
+            dataGridEventsWeely.DataSource = eventController.getWeeklyEvents(MainView.file);
+
         }
 
         private void WeeklyView_Load(object sender, EventArgs e)
         {
             PopulateTransactionsDataGridView();
         }
+
     }
 }

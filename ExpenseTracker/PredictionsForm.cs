@@ -10,11 +10,25 @@ using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-    public partial class PredictionsForm : Form
+    public partial class btnGneerate : Form
     {
-        public PredictionsForm()
+        PredictionController _controller=new PredictionController();
+        public btnGneerate()
         {
             InitializeComponent();
+        }
+
+        private void PredictionsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGeneratePrd_Click(object sender, EventArgs e)
+        {
+            int predictedValue=_controller.predictExpense();
+           
+            lblPrediction.Text = predictedValue.ToString();
+            lblPrediction.Visible = true;
         }
     }
 }

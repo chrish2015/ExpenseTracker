@@ -29,19 +29,25 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtEvent = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateEvents = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDescription = new System.Windows.Forms.RichTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.rbtPanel = new System.Windows.Forms.Panel();
-            this.rbtYes = new System.Windows.Forms.RadioButton();
-            this.rbtNo = new System.Windows.Forms.RadioButton();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.rbtPanel = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rbtNo = new System.Windows.Forms.RadioButton();
+            this.rbtYes = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateEvents = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtEvent = new System.Windows.Forms.TextBox();
+            this.dataGridEvents = new System.Windows.Forms.DataGridView();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsRecurring = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.rbtPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridEvents)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -61,54 +67,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add  Event";
             // 
-            // txtEvent
+            // btnSubmit
             // 
-            this.txtEvent.Location = new System.Drawing.Point(112, 39);
-            this.txtEvent.Name = "txtEvent";
-            this.txtEvent.Size = new System.Drawing.Size(200, 20);
-            this.txtEvent.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Event Name";
-            // 
-            // dateEvents
-            // 
-            this.dateEvents.Location = new System.Drawing.Point(112, 86);
-            this.dateEvents.Name = "dateEvents";
-            this.dateEvents.Size = new System.Drawing.Size(200, 20);
-            this.dateEvents.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Date";
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(449, 38);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(170, 67);
-            this.txtDescription.TabIndex = 4;
-            this.txtDescription.Text = "";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(383, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Description";
+            this.btnSubmit.Location = new System.Drawing.Point(964, 42);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(75, 49);
+            this.btnSubmit.TabIndex = 7;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // rbtPanel
             // 
@@ -120,16 +87,14 @@
             this.rbtPanel.Size = new System.Drawing.Size(219, 100);
             this.rbtPanel.TabIndex = 6;
             // 
-            // rbtYes
+            // label4
             // 
-            this.rbtYes.AutoSize = true;
-            this.rbtYes.Location = new System.Drawing.Point(34, 55);
-            this.rbtYes.Name = "rbtYes";
-            this.rbtYes.Size = new System.Drawing.Size(43, 17);
-            this.rbtYes.TabIndex = 0;
-            this.rbtYes.TabStop = true;
-            this.rbtYes.Text = "Yes";
-            this.rbtYes.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(51, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Is this a recurring event";
             // 
             // rbtNo
             // 
@@ -142,39 +107,128 @@
             this.rbtNo.Text = "No";
             this.rbtNo.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // rbtYes
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Is this a recurring event";
+            this.rbtYes.AutoSize = true;
+            this.rbtYes.Location = new System.Drawing.Point(34, 55);
+            this.rbtYes.Name = "rbtYes";
+            this.rbtYes.Size = new System.Drawing.Size(43, 17);
+            this.rbtYes.TabIndex = 0;
+            this.rbtYes.TabStop = true;
+            this.rbtYes.Text = "Yes";
+            this.rbtYes.UseVisualStyleBackColor = true;
             // 
-            // btnSubmit
+            // label3
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(964, 42);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 49);
-            this.btnSubmit.TabIndex = 7;
-            this.btnSubmit.Text = "Submit";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(383, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Description";
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(449, 38);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(170, 67);
+            this.txtDescription.TabIndex = 4;
+            this.txtDescription.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(26, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Date";
+            // 
+            // dateEvents
+            // 
+            this.dateEvents.Location = new System.Drawing.Point(112, 86);
+            this.dateEvents.Name = "dateEvents";
+            this.dateEvents.Size = new System.Drawing.Size(200, 20);
+            this.dateEvents.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Event Name";
+            // 
+            // txtEvent
+            // 
+            this.txtEvent.Location = new System.Drawing.Point(112, 39);
+            this.txtEvent.Name = "txtEvent";
+            this.txtEvent.Size = new System.Drawing.Size(200, 20);
+            this.txtEvent.TabIndex = 0;
+            // 
+            // dataGridEvents
+            // 
+            this.dataGridEvents.AllowUserToAddRows = false;
+            this.dataGridEvents.AllowUserToDeleteRows = false;
+            this.dataGridEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridEvents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Name,
+            this.Date,
+            this.Description,
+            this.IsRecurring});
+            this.dataGridEvents.Location = new System.Drawing.Point(12, 161);
+            this.dataGridEvents.Name = "dataGridEvents";
+            this.dataGridEvents.ReadOnly = true;
+            this.dataGridEvents.Size = new System.Drawing.Size(1116, 344);
+            this.dataGridEvents.TabIndex = 2;
+            // 
+            // Name
+            // 
+            this.Name.DataPropertyName = "Name";
+            this.Name.HeaderText = "Name";
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            this.Name.Width = 200;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 200;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            // 
+            // IsRecurring
+            // 
+            this.IsRecurring.DataPropertyName = "IsRecurring";
+            this.IsRecurring.HeaderText = "IsRecurring";
+            this.IsRecurring.Name = "IsRecurring";
+            this.IsRecurring.ReadOnly = true;
             // 
             // EventView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
+            this.Controls.Add(this.dataGridEvents);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "EventView";
             this.Text = "EventView";
             this.Load += new System.EventHandler(this.EventView_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.rbtPanel.ResumeLayout(false);
             this.rbtPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridEvents)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -193,5 +247,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton rbtNo;
         private System.Windows.Forms.RadioButton rbtYes;
+        private System.Windows.Forms.DataGridView dataGridEvents;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsRecurring;
     }
 }

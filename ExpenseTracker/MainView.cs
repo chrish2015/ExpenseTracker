@@ -14,6 +14,7 @@ namespace ExpenseTracker
     {
         public static User user;
         private Button lastButton;
+        public static string file;
         public MainView(User user)
         {
             InitializeComponent();
@@ -21,6 +22,8 @@ namespace ExpenseTracker
             lastButton = btnTransactions;
             DisplayTransactionForm();
             ColourButton(btnTransactions);
+            string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            file = System.IO.Path.Combine(path, "Events.xml");
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)
@@ -62,7 +65,7 @@ namespace ExpenseTracker
         {
 
             this.pnlMain.Controls.Clear();
-            PredictionsForm predictionsForm = new PredictionsForm();
+            btnGneerate predictionsForm = new btnGneerate();
             predictionsForm.TopLevel = false;
             predictionsForm.AutoScroll = true;
             this.pnlMain.Controls.Add(predictionsForm);
@@ -96,6 +99,11 @@ namespace ExpenseTracker
             this.pnlMain.Controls.Add(eventView);
             eventView.Show();
             ColourButton((Button)sender);
+        }
+
+        private void MainView_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
