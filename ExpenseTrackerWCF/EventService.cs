@@ -7,6 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace ExpenseTrackerWCF
 {
@@ -18,41 +19,40 @@ namespace ExpenseTrackerWCF
             return string.Format("You entered: {0}", eventName);
         }
 
-
-        public void save(string eventName, string details, string date, string recurring,string file)
+        private void save(string eventName, string details, string date, string recurring, string file)
         {
+            XDocument document = null;
 
-            // Create a new file in the working directory
-            XmlTextWriter textWriter = new XmlTextWriter(file, Encoding.UTF8);
-            // Opens the document
-            textWriter.WriteStartDocument();
-            // Write comments
-            textWriter.WriteComment("EventsXML.xml");
-            // Write first element
-            textWriter.WriteStartElement("Events");
-            textWriter.WriteStartElement("Event");
-            // Write next element
-            textWriter.WriteStartElement("eventName", "");
-            textWriter.WriteString(eventName);
-            textWriter.WriteEndElement();
-            // Write some more elements
-            textWriter.WriteStartElement("details", "");
-            textWriter.WriteString(details);
-            textWriter.WriteEndElement();
-            textWriter.WriteStartElement("date", "");
-            textWriter.WriteString(date);
-            textWriter.WriteEndElement();
-            textWriter.WriteStartElement("isRecurring", "");
-            textWriter.WriteString(recurring);
-            //nested element
-            textWriter.WriteEndElement();
-            textWriter.WriteEndElement();
-            textWriter.WriteEndElement();
-            // Ends the document.
-            textWriter.WriteEndDocument();
-            // close writer
-            textWriter.Close();
-            Console.ReadLine();
+            try
+            {
+                document = XDocument.Load(file);
+            }
+            catch (Exception exception)
+            {
+                createAndLoadXML(file);
+                document = XDocument.Load(file);
+            }
+
+            XElement school = document.Element("Events");
+            school.Add(new XElement("Event",
+                new XElement("Name", eventName),
+                new XElement("Description",details),
+                new XElement("IsRecurring", recurring),
+                new XElement("Date", date)));
+            document.Save(file);
+        }
+
+        private void createAndLoadXML(string file)
+        {
+            // Method to create XML file based on name entered by user
+
+            // Create XDocument
+            XDocument document = new XDocument(
+                new XDeclaration("1.0", "utf8", "yes"),
+                new XComment("Events.xml"),
+                new XElement("Events"
+                ));
+            document.Save(file);
         }
     }
 }

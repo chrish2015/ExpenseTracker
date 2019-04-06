@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using ExpenseTracker.ServiceReference1;
 
 namespace ExpenseTracker
@@ -31,7 +33,9 @@ namespace ExpenseTracker
             string file = System.IO.Path.Combine(path, "Events.xml");
             var checkedRecurringOption = rbtPanel.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
+
             a.SaveEvent(txtEvent.Text, txtDescription.Text, dateEvents.Text, checkedRecurringOption.Text, file);
         }
+
     }
 }
