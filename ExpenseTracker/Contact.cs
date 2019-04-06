@@ -12,19 +12,10 @@ namespace ExpenseTracker
     using System;
     using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class Contact
     {
         public int Id { get; set; }
         public string name { get; set; }
-        public System.DateTime date { get; set; }
-        public int value { get; set; }
-        public string transactionType { get; set; }
-        public string description { get; set; }
-        public string isRecurring { get; set; }
-        public int UsersId { get; set; }
-        public int ContactId { get; set; }
-    
-        public virtual User User { get; set; }
-        public virtual Contact Contact { get; set; }
+        public string contactType { get; set; }
     }
 }

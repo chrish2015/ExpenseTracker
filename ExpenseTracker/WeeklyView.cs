@@ -17,14 +17,22 @@ namespace ExpenseTracker
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void PopulateTransactionsDataGridView()
         {
+            dataGridWeeklyView.AutoGenerateColumns = false;
+            using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
+            {
+                var dateTime = DateTime.Now.AddDays(-7);
+                var todayDateTime = DateTime.Now;
+                dataGridWeeklyView.DataSource =
+                    dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime).ToList();
 
+            }
         }
 
-        private void dataGridTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void WeeklyView_Load(object sender, EventArgs e)
         {
-
+            PopulateTransactionsDataGridView();
         }
     }
 }

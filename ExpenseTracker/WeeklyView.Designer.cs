@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridTransactions = new System.Windows.Forms.DataGridView();
+            this.dataGridWeeklyView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isRecurring = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTransactions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridWeeklyView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridTransactions
+            // dataGridWeeklyView
             // 
-            this.dataGridTransactions.AllowUserToDeleteRows = false;
-            this.dataGridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridWeeklyView.AllowUserToDeleteRows = false;
+            this.dataGridWeeklyView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridWeeklyView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.name,
             this.date,
             this.value,
+            this.transactionType,
             this.description,
             this.isRecurring});
-            this.dataGridTransactions.Location = new System.Drawing.Point(12, 12);
-            this.dataGridTransactions.Name = "dataGridTransactions";
-            this.dataGridTransactions.ReadOnly = true;
-            this.dataGridTransactions.Size = new System.Drawing.Size(1116, 497);
-            this.dataGridTransactions.TabIndex = 1;
-            this.dataGridTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTransactions_CellContentClick);
+            this.dataGridWeeklyView.Location = new System.Drawing.Point(12, 12);
+            this.dataGridWeeklyView.Name = "dataGridWeeklyView";
+            this.dataGridWeeklyView.ReadOnly = true;
+            this.dataGridWeeklyView.Size = new System.Drawing.Size(1116, 497);
+            this.dataGridWeeklyView.TabIndex = 1;
             // 
             // Id
             // 
@@ -85,6 +86,13 @@
             this.value.Name = "value";
             this.value.ReadOnly = true;
             // 
+            // transactionType
+            // 
+            this.transactionType.DataPropertyName = "transactionType";
+            this.transactionType.HeaderText = "Transaction Type";
+            this.transactionType.Name = "transactionType";
+            this.transactionType.ReadOnly = true;
+            // 
             // description
             // 
             this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -106,22 +114,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
             this.ControlBox = false;
-            this.Controls.Add(this.dataGridTransactions);
+            this.Controls.Add(this.dataGridWeeklyView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WeeklyView";
             this.Text = "WeeklyView";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTransactions)).EndInit();
+            this.Load += new System.EventHandler(this.WeeklyView_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridWeeklyView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridTransactions;
+        private System.Windows.Forms.DataGridView dataGridWeeklyView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn isRecurring;
     }

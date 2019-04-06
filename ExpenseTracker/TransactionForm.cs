@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +15,8 @@ namespace ExpenseTracker
     public partial class TransactionForm : Form
     {
         TransactionController transactionController = new TransactionController();
+        private List<Contact> payees;
+        private List<Contact> payers;
         public TransactionForm()
         {
             InitializeComponent();
@@ -41,6 +44,12 @@ namespace ExpenseTracker
 
         private void TransactionForm_Load(object sender, EventArgs e)
         {
+            using (var dbEntity = new ExpenseTrackerDBEntities())
+            {
+                payers = dbEntity.Contacts.Where(r => r.contactType == "Payer").ToList<Contact>();
+                payees = dbEntity.Contacts.Where(r => r.contactType == "Payee").ToList<Contact>();
+            }
+
             PopulateTransactionsDataGridView();
             Clear();
         }
@@ -64,7 +73,10 @@ namespace ExpenseTracker
                 .FirstOrDefault(r => r.Checked);
             var checkedRecurringOption = pnlRecurring.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
-            transactionController.Save(name, value, description, dateTime, checkedType, checkedRecurringOption);
+
+
+            var t = new Thread(() => transactionController.Save(name, value, description, dateTime, checkedType, checkedRecurringOption));
+            t.Start();
             PopulateTransactionsDataGridView();
 
         }
@@ -123,10 +135,10 @@ namespace ExpenseTracker
                 using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
                 {
                     transaction = transactionController.getTransaction(dbEntities, transaction);
-                    txtName                            .Text = transaction.name;
-                    txtDescription                     .Text = transaction.description;
-                    txtValue                           .Text = transaction.value.ToString();
-                    if (transaction                    .isRecurring == "Yes")
+                    txtName.Text = transaction.name;
+                    txtDescription.Text = transaction.description;
+                    txtValue.Text = transaction.value.ToString();
+                    if (transaction.isRecurring == "Yes")
                     {
                         rbtYes.Checked = true;
                     }
@@ -151,6 +163,38 @@ namespace ExpenseTracker
             }
         }
 
+        private void datePickerTransactions_ValueChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void expense_Checked(object sender, EventArgs e)
+        {
+            lblContact.Text = "Payee";
+            cmbBoxContacts.Items.Clear();
+            foreach (var payee in payees)
+            {
+                cmbBoxContacts.Items.Add(payee.name);
+            }
+            cmbBoxContacts.SelectionStart = 1;
+        }
+
+
+        private void income_Clicked(object sender, EventArgs e)
+        {
+            lblContact.Text = "Payer";
+            cmbBoxContacts.Items.Clear();
+            foreach (var payer in payers)
+            {
+                cmbBoxContacts.Items.Add(payer.name);
+            }
+
+            cmbBoxContacts.SelectedIndex = 1;
+        }
     }
+}
+class ProjectNameAndId
+{
+    public string Name { get; set; }
+    public int Id { get; set; }
 }

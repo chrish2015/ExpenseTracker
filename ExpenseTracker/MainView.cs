@@ -57,5 +57,21 @@ namespace ExpenseTracker
             button.BackColor = Color.Aqua;
             lastButton = button;
         }
+
+        private void btnPredictions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnContacts_Click(object sender, EventArgs e)
+        {
+            this.pnlMain.Controls.Clear();
+            ContactsForm userForm = new ContactsForm();
+            userForm.TopLevel = false;
+            userForm.AutoScroll = true;
+            this.pnlMain.Controls.Add(userForm);
+            userForm.Show();
+            ColourButton((Button)sender);
+        }
     }
 }

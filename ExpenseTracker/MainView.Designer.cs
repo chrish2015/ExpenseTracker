@@ -55,6 +55,7 @@
             this.btnPredictions.TabIndex = 1;
             this.btnPredictions.Text = "Predictions";
             this.btnPredictions.UseVisualStyleBackColor = true;
+            this.btnPredictions.Click += new System.EventHandler(this.btnPredictions_Click);
             // 
             // btnReports
             // 
@@ -83,6 +84,7 @@
             this.btnContacts.TabIndex = 4;
             this.btnContacts.Text = "Contacts";
             this.btnContacts.UseVisualStyleBackColor = true;
+            this.btnContacts.Click += new System.EventHandler(this.btnContacts_Click);
             // 
             // pnlMain
             // 

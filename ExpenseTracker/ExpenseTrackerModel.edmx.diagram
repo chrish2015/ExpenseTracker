@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="ExpenseTrackerDBModel.Transaction" Width="1.5" PointX="4" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ExpenseTrackerDBModel.User" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="ExpenseTrackerDBModel.FK_UsersTransactions" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ExpenseTrackerDBModel.Contact" Width="1.5" PointX="8.5" PointY="1.375" />
+        <AssociationConnector Association="ExpenseTrackerDBModel.TransactionContact" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

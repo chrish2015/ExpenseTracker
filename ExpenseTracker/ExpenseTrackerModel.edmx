@@ -4,45 +4,71 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="ExpenseTrackerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="ExpenseTrackerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ExpenseTrackerDBModelStoreContainer">
-    <EntitySet Name="Transactions" EntityType="ExpenseTrackerDBModel.Store.Transactions" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Users" EntityType="ExpenseTrackerDBModel.Store.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transactions" EntityType="ExpenseTrackerDBModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="ExpenseTrackerDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contacts" EntityType="ExpenseTrackerDBModel.Store.Contacts" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_UsersTransactions" Association="ExpenseTrackerDBModel.Store.FK_UsersTransactions">
-      <End EntitySet="Users" Role="Users" />
-      <End EntitySet="Transactions" Role="Transactions" />
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionContact" Association="ExpenseTrackerDBModel.Store.TransactionContact">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="Contact" EntitySet="Contacts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="name" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="date" Nullable="false" Type="datetime" />
-    <Property Name="value" Nullable="false" Type="int" />
-    <Property Name="transactionType" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="description" Nullable="true" Type="nvarchar(max)" />
-    <Property Name="isRecurring" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="UsersId" Nullable="false" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="value" Type="int" Nullable="false" />
+    <Property Name="transactionType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="isRecurring" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UsersId" Type="int" Nullable="false" />
+    <Property Name="ContactId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="username" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="password" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contacts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contactType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_UsersTransactions">
-    <End Type="ExpenseTrackerDBModel.Store.Users" Multiplicity="1" Role="Users" />
-    <End Type="ExpenseTrackerDBModel.Store.Transactions" Multiplicity="*" Role="Transactions" />
+    <End Role="Users" Type="ExpenseTrackerDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Transactions" Type="ExpenseTrackerDBModel.Store.Transactions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Transactions">
         <PropertyRef Name="UsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionContact">
+    <End Role="Transaction" Type="ExpenseTrackerDBModel.Store.Transactions" Multiplicity="*" />
+    <End Role="Contact" Type="ExpenseTrackerDBModel.Store.Contacts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Contact">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="ContactId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -63,6 +89,8 @@
           <Property Name="isRecurring" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
           <Property Name="UsersId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_UsersTransactions" FromRole="Transactions" ToRole="Users" />
+          <NavigationProperty Name="Contact" Relationship="ExpenseTrackerDBModel.TransactionContact" FromRole="Transaction" ToRole="Contact" />
+          <Property Name="ContactId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -92,13 +120,38 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="ExpenseTrackerDBModel.Contact" />
+          <AssociationSet Name="TransactionContact" Association="ExpenseTrackerDBModel.TransactionContact">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="contactType" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="TransactionContact">
+          <End Type="ExpenseTrackerDBModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <End Type="ExpenseTrackerDBModel.Contact" Role="Contact" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping CdmEntityContainer="ExpenseTrackerDBEntities" StorageEntityContainer="ExpenseTrackerDBModelStoreContainer">
+  <EntityContainerMapping StorageEntityContainer="ExpenseTrackerDBModelStoreContainer" CdmEntityContainer="ExpenseTrackerDBEntities">
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="IsTypeOf(ExpenseTrackerDBModel.Transaction)">
         <MappingFragment StoreEntitySet="Transactions">
@@ -110,6 +163,7 @@
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="isRecurring" ColumnName="isRecurring" />
           <ScalarProperty Name="UsersId" ColumnName="UsersId" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,6 +173,15 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="IsTypeOf(ExpenseTrackerDBModel.Contact)">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="contactType" ColumnName="contactType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

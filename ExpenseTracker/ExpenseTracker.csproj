@@ -57,6 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contact.cs">
+      <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactsController.cs" />
     <Compile Include="ExpenseTrackerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,6 +75,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExpenseTrackerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PredictionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PredictionsForm.Designer.cs">
+      <DependentUpon>PredictionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RadioButtons.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RadioButtons.designer.cs">
+      <DependentUpon>RadioButtons.cs</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
@@ -92,6 +108,12 @@
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserController.cs" />
+    <Compile Include="ContactsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactsForm.Designer.cs">
+      <DependentUpon>ContactsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,11 +128,20 @@
     <Compile Include="WeeklyView.Designer.cs">
       <DependentUpon>WeeklyView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PredictionsForm.resx">
+      <DependentUpon>PredictionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadioButtons.resx">
+      <DependentUpon>RadioButtons.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransactionForm.resx">
       <DependentUpon>TransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactsForm.resx">
+      <DependentUpon>ContactsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserLoginForm.resx">
       <DependentUpon>UserLoginForm.cs</DependentUpon>
