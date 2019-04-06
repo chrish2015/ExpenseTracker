@@ -14,8 +14,8 @@ namespace ExpenseTracker
     
     public partial class Transaction
     {
-        public int Id { get; set; }
-        public string name { get; set; }
+        public int transactionId { get; set; }
+        public string transactionName { get; set; }
         public System.DateTime date { get; set; }
         public int value { get; set; }
         public string transactionType { get; set; }

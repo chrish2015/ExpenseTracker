@@ -73,5 +73,11 @@ namespace ExpenseTracker
             userForm.Show();
             ColourButton((Button)sender);
         }
+
+        private void btnExitProgram_Click(object sender, FormClosedEventArgs e)
+        {
+
+            Application.Exit();
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace ExpenseTracker
                     dbEntities.Contacts.Add(new Contact()
                     {
                         contactType = checkedType.Text,
-                        name = contact.Trim()
+                        contactName = contact.Trim()
                     });
                     dbEntities.SaveChanges();
                 }

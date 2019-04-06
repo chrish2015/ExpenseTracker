@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,17 +18,13 @@ namespace ExpenseTracker
         TransactionController transactionController = new TransactionController();
         private List<Contact> payees;
         private List<Contact> payers;
+
         public TransactionForm()
         {
             InitializeComponent();
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
@@ -50,6 +47,7 @@ namespace ExpenseTracker
                 payees = dbEntity.Contacts.Where(r => r.contactType == "Payee").ToList<Contact>();
             }
 
+
             PopulateTransactionsDataGridView();
             Clear();
         }
@@ -64,21 +62,15 @@ namespace ExpenseTracker
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            var name = txtName.Text;
-            var value = Int32.Parse(txtValue.Text);
-            var description = txtDescription.Text;
-            var dateTime = datePickerTransactions.Value;
-
             var checkedType = pnlType.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
             var checkedRecurringOption = pnlRecurring.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
+            Contact contact = (Contact)cmbBoxContacts.SelectedItem;
 
-
-            var t = new Thread(() => transactionController.Save(name, value, description, dateTime, checkedType, checkedRecurringOption));
-            t.Start();
+            transactionController.Save(txtName.Text, Int32.Parse(txtValue.Text), txtDescription.Text, datePickerTransactions.Value,
+                checkedType, checkedRecurringOption, contact);
             PopulateTransactionsDataGridView();
-
         }
 
         private void txtValue_Validating(object sender, CancelEventArgs e)
@@ -93,7 +85,8 @@ namespace ExpenseTracker
             culture = CultureInfo.CreateSpecificCulture("en-US");
             if (!Decimal.TryParse(value, style, culture, out currency))
             {
-                MessageBox.Show("Please enter a valid currency amount.", "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a valid currency amount.", "Invalid Value", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 // prevent the textbox from losing focus
                 e.Cancel = true;
             }
@@ -116,26 +109,27 @@ namespace ExpenseTracker
             dataGridTransactions.AutoGenerateColumns = false;
             using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
             {
-                dataGridTransactions.DataSource = dbEntities.Transactions.ToList<Transaction>();
+                var q = from t1 in dbEntities.Transactions
+                        join t2 in dbEntities.Contacts on t1.ContactId equals t2.contactId
+                        select new { t1.transactionId, t1.transactionName, t1.date, t1.description, t1.isRecurring, t1.transactionType, t1.UsersId, t1.value, t2.contactName, t2.contactId };
+                dataGridTransactions.DataSource = q.ToList();
+
 
             }
         }
 
-        private void dataGridTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void dataGridTransactions_DoubleClick(object sender, EventArgs e)
         {
             Transaction transaction = new Transaction();
             if (dataGridTransactions.CurrentRow.Index != -1)
             {
-                transaction.Id = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["id"].Value);
+                transaction.transactionId = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["transactionId"].Value);
+                int contactId = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["contactId"].Value);
                 using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
                 {
                     transaction = transactionController.getTransaction(dbEntities, transaction);
-                    txtName.Text = transaction.name;
+                    txtName.Text = transaction.transactionName;
                     txtDescription.Text = transaction.description;
                     txtValue.Text = transaction.value.ToString();
                     if (transaction.isRecurring == "Yes")
@@ -150,11 +144,19 @@ namespace ExpenseTracker
                     if (transaction.transactionType == "Income")
                     {
                         btnIncome.Checked = true;
+                        int index = payers.IndexOf(payers.Find(r => r.contactId == contactId));
+                        income_Combo();
+                        cmbBoxContacts.SelectedIndex = index;
+
                     }
                     else if (transaction.transactionType == "Expense")
                     {
                         btnExpense.Checked = true;
+                        int index = payees.IndexOf(payees.Find(r => r.contactId == contactId));
+                        expense_Combo();
+                        cmbBoxContacts.SelectedIndex = index;
                     }
+
 
                     btnSubmit.Text = "Update";
                     btnDelete.Enabled = true;
@@ -170,31 +172,32 @@ namespace ExpenseTracker
 
         private void expense_Checked(object sender, EventArgs e)
         {
+            expense_Combo();
+        }
+
+        private void expense_Combo()
+        {
             lblContact.Text = "Payee";
-            cmbBoxContacts.Items.Clear();
-            foreach (var payee in payees)
-            {
-                cmbBoxContacts.Items.Add(payee.name);
-            }
-            cmbBoxContacts.SelectionStart = 1;
+            cmbBoxContacts.DataSource = payees;
+            cmbBoxContacts.DisplayMember = "contactName";
         }
 
 
         private void income_Clicked(object sender, EventArgs e)
         {
-            lblContact.Text = "Payer";
-            cmbBoxContacts.Items.Clear();
-            foreach (var payer in payers)
-            {
-                cmbBoxContacts.Items.Add(payer.name);
-            }
+            income_Combo();
+        }
 
-            cmbBoxContacts.SelectedIndex = 1;
+        private void income_Combo()
+        {
+            lblContact.Text = "Payer";
+            cmbBoxContacts.DataSource = payers;
+            cmbBoxContacts.DisplayMember = "contactName";
+        }
+
+        private void dataGridTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
-}
-class ProjectNameAndId
-{
-    public string Name { get; set; }
-    public int Id { get; set; }
 }

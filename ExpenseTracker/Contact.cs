@@ -14,8 +14,8 @@ namespace ExpenseTracker
     
     public partial class Contact
     {
-        public int Id { get; set; }
-        public string name { get; set; }
+        public int contactId { get; set; }
+        public string contactName { get; set; }
         public string contactType { get; set; }
     }
 }

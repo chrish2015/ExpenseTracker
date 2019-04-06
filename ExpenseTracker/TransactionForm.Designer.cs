@@ -29,20 +29,22 @@
         private void InitializeComponent()
         {
             this.dataGridTransactions = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.transactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isRecurring = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtValue = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -57,6 +59,7 @@
             this.btnExpense = new System.Windows.Forms.RadioButton();
             this.lblContact = new System.Windows.Forms.Label();
             this.cmbBoxContacts = new System.Windows.Forms.ComboBox();
+            this.txtDescription = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTransactions)).BeginInit();
             this.pnlRecurring.SuspendLayout();
             this.pnlType.SuspendLayout();
@@ -67,13 +70,16 @@
             this.dataGridTransactions.AllowUserToDeleteRows = false;
             this.dataGridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.name,
+            this.transactionId,
+            this.transactionName,
             this.date,
             this.value,
             this.transactionType,
             this.description,
-            this.isRecurring});
+            this.isRecurring,
+            this.contactName,
+            this.contactId,
+            this.userId});
             this.dataGridTransactions.Location = new System.Drawing.Point(337, 12);
             this.dataGridTransactions.Name = "dataGridTransactions";
             this.dataGridTransactions.ReadOnly = true;
@@ -83,20 +89,20 @@
             this.dataGridTransactions.Click += new System.EventHandler(this.income_Clicked);
             this.dataGridTransactions.DoubleClick += new System.EventHandler(this.dataGridTransactions_DoubleClick);
             // 
-            // Id
+            // transactionId
             // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
+            this.transactionId.DataPropertyName = "transactionId";
+            this.transactionId.HeaderText = "Transaction ID";
+            this.transactionId.Name = "transactionId";
+            this.transactionId.ReadOnly = true;
+            this.transactionId.Visible = false;
             // 
-            // name
+            // transactionName
             // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
+            this.transactionName.DataPropertyName = "transactionName";
+            this.transactionName.HeaderText = "Name";
+            this.transactionName.Name = "transactionName";
+            this.transactionName.ReadOnly = true;
             // 
             // date
             // 
@@ -133,6 +139,29 @@
             this.isRecurring.HeaderText = "Is Recurring";
             this.isRecurring.Name = "isRecurring";
             this.isRecurring.ReadOnly = true;
+            // 
+            // contactName
+            // 
+            this.contactName.DataPropertyName = "contactName";
+            this.contactName.HeaderText = "Contact";
+            this.contactName.Name = "contactName";
+            this.contactName.ReadOnly = true;
+            // 
+            // contactId
+            // 
+            this.contactId.DataPropertyName = "contactId";
+            this.contactId.HeaderText = "Contact ID";
+            this.contactId.Name = "contactId";
+            this.contactId.ReadOnly = true;
+            this.contactId.Visible = false;
+            // 
+            // userId
+            // 
+            this.userId.DataPropertyName = "userId";
+            this.userId.HeaderText = "User ID";
+            this.userId.Name = "userId";
+            this.userId.ReadOnly = true;
+            this.userId.Visible = false;
             // 
             // label1
             // 
@@ -187,15 +216,6 @@
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Value";
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(92, 212);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(226, 40);
-            this.txtDescription.TabIndex = 9;
-            this.txtDescription.Text = "";
-            this.txtDescription.Click += new System.EventHandler(this.expense_Checked);
             // 
             // label5
             // 
@@ -309,12 +329,10 @@
             // btnExpense
             // 
             this.btnExpense.AutoSize = true;
-            this.btnExpense.Checked = true;
             this.btnExpense.Location = new System.Drawing.Point(10, 11);
             this.btnExpense.Name = "btnExpense";
             this.btnExpense.Size = new System.Drawing.Size(66, 17);
             this.btnExpense.TabIndex = 0;
-            this.btnExpense.TabStop = true;
             this.btnExpense.Text = "Expense";
             this.btnExpense.UseVisualStyleBackColor = true;
             this.btnExpense.Click += new System.EventHandler(this.expense_Checked);
@@ -336,12 +354,21 @@
             this.cmbBoxContacts.Size = new System.Drawing.Size(236, 21);
             this.cmbBoxContacts.TabIndex = 25;
             // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(92, 201);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(226, 52);
+            this.txtDescription.TabIndex = 26;
+            this.txtDescription.Text = "";
+            // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.cmbBoxContacts);
             this.Controls.Add(this.lblContact);
             this.Controls.Add(this.pnlType);
@@ -351,7 +378,6 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -382,7 +408,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtValue;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.Button btnDelete;
@@ -395,14 +420,18 @@
         private System.Windows.Forms.Panel pnlType;
         private System.Windows.Forms.RadioButton btnIncome;
         private System.Windows.Forms.RadioButton btnExpense;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.Label lblContact;
+        private System.Windows.Forms.ComboBox cmbBoxContacts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn transactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn isRecurring;
-        private System.Windows.Forms.Label lblContact;
-        private System.Windows.Forms.ComboBox cmbBoxContacts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userId;
+        private System.Windows.Forms.RichTextBox txtDescription;
     }
 }

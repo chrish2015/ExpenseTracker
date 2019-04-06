@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/06/2019 09:02:00
+-- Date Created: 04/06/2019 14:54:10
 -- Generated from EDMX file: C:\Applications\Projects\ExpenseTracker\ExpenseTracker\ExpenseTrackerModel.edmx
 -- --------------------------------------------------
 
@@ -44,8 +44,8 @@ GO
 
 -- Creating table 'Transactions'
 CREATE TABLE [dbo].[Transactions] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL,
+    [transactionId] int IDENTITY(1,1) NOT NULL,
+    [transactionName] nvarchar(max)  NOT NULL,
     [date] datetime  NOT NULL,
     [value] int  NOT NULL,
     [transactionType] nvarchar(max)  NOT NULL,
@@ -66,8 +66,8 @@ GO
 
 -- Creating table 'Contacts'
 CREATE TABLE [dbo].[Contacts] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [name] nvarchar(max)  NOT NULL,
+    [contactId] int IDENTITY(1,1) NOT NULL,
+    [contactName] nvarchar(max)  NOT NULL,
     [contactType] nvarchar(max)  NOT NULL
 );
 GO
@@ -76,10 +76,10 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'Transactions'
+-- Creating primary key on [transactionId] in table 'Transactions'
 ALTER TABLE [dbo].[Transactions]
 ADD CONSTRAINT [PK_Transactions]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([transactionId] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'Users'
@@ -88,10 +88,10 @@ ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Contacts'
+-- Creating primary key on [contactId] in table 'Contacts'
 ALTER TABLE [dbo].[Contacts]
 ADD CONSTRAINT [PK_Contacts]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([contactId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -118,7 +118,7 @@ ALTER TABLE [dbo].[Transactions]
 ADD CONSTRAINT [FK_TransactionContact]
     FOREIGN KEY ([ContactId])
     REFERENCES [dbo].[Contacts]
-        ([Id])
+        ([contactId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 

@@ -14,7 +14,7 @@ namespace ExpenseTracker
 
         }
 
-        public void Save(string name, int value, string description, DateTime dateTime, RadioButton checkedType, RadioButton checkedRecurringOption)
+        public void Save(string transactionName, int value, string description, DateTime dateTime, RadioButton checkedType, RadioButton checkedRecurringOption, Contact contact)
         {
             using (var dbEntities = new ExpenseTrackerDBEntities())
             {
@@ -22,11 +22,13 @@ namespace ExpenseTracker
                 {
                     User = MainView.user,
                     date = dateTime,
-                    name = name,
+                    transactionName = transactionName,
                     description = description,
                     value = value,
                     transactionType= checkedType.Text,
-                    isRecurring = checkedRecurringOption.Text
+                    isRecurring = checkedRecurringOption.Text,
+                    Contact = contact
+                    
                 });
                 dbEntities.SaveChanges();
             }
@@ -34,7 +36,7 @@ namespace ExpenseTracker
 
         public Transaction getTransaction(ExpenseTrackerDBEntities dbEntities, Transaction transaction)
         {
-            return dbEntities.Transactions.Where(x => x.Id == transaction.Id).FirstOrDefault();
+            return dbEntities.Transactions.Where(x => x.transactionId == transaction.transactionId).FirstOrDefault();
         }
     }
 }

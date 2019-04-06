@@ -20,10 +20,10 @@
   </EntityContainer>
   <EntityType Name="Transactions">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="transactionId" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="transactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="transactionName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="date" Type="datetime" Nullable="false" />
     <Property Name="value" Type="int" Nullable="false" />
     <Property Name="transactionType" Type="nvarchar(max)" Nullable="false" />
@@ -42,10 +42,10 @@
   </EntityType>
   <EntityType Name="Contacts">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="contactId" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="contactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="contactName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="contactType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_UsersTransactions">
@@ -65,7 +65,7 @@
     <End Role="Contact" Type="ExpenseTrackerDBModel.Store.Contacts" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Contact">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="contactId" />
       </Principal>
       <Dependent Role="Transaction">
         <PropertyRef Name="ContactId" />
@@ -78,10 +78,10 @@
       <Schema Namespace="ExpenseTrackerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Transaction">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="transactionId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="transactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transactionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="value" Type="Int32" Nullable="false" />
           <Property Name="transactionType" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
@@ -128,10 +128,10 @@
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="contactId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="contactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contactName" Type="String" Nullable="false" />
           <Property Name="contactType" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="TransactionContact">
@@ -139,7 +139,7 @@
           <End Type="ExpenseTrackerDBModel.Contact" Role="Contact" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Contact">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="contactId" />
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="ContactId" />
@@ -155,8 +155,8 @@
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="IsTypeOf(ExpenseTrackerDBModel.Transaction)">
         <MappingFragment StoreEntitySet="Transactions">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="transactionId" ColumnName="transactionId" />
+          <ScalarProperty Name="transactionName" ColumnName="transactionName" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="value" ColumnName="value" />
           <ScalarProperty Name="transactionType" ColumnName="transactionType" />
@@ -179,8 +179,8 @@
     <EntitySetMapping Name="Contacts">
       <EntityTypeMapping TypeName="IsTypeOf(ExpenseTrackerDBModel.Contact)">
         <MappingFragment StoreEntitySet="Contacts">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="contactId" ColumnName="contactId" />
+          <ScalarProperty Name="contactName" ColumnName="contactName" />
           <ScalarProperty Name="contactType" ColumnName="contactType" />
         </MappingFragment>
       </EntityTypeMapping>
