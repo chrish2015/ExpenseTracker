@@ -61,6 +61,13 @@ namespace ExpenseTracker
         private void btnPredictions_Click(object sender, EventArgs e)
         {
 
+            this.pnlMain.Controls.Clear();
+            PredictionsForm predictionsForm = new PredictionsForm();
+            predictionsForm.TopLevel = false;
+            predictionsForm.AutoScroll = true;
+            this.pnlMain.Controls.Add(predictionsForm);
+            predictionsForm.Show();
+            ColourButton((Button)sender);
         }
 
         private void btnContacts_Click(object sender, EventArgs e)
@@ -78,6 +85,17 @@ namespace ExpenseTracker
         {
 
             Application.Exit();
+        }
+
+        private void btnEvents_Click(object sender, EventArgs e)
+        {
+            this.pnlMain.Controls.Clear();
+            EventView eventView = new EventView();
+            eventView.TopLevel = false;
+            eventView.AutoScroll = true;
+            this.pnlMain.Controls.Add(eventView);
+            eventView.Show();
+            ColourButton((Button)sender);
         }
     }
 }

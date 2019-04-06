@@ -46,6 +46,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +62,12 @@
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ContactsController.cs" />
+    <Compile Include="EventView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventView.Designer.cs">
+      <DependentUpon>EventView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseTrackerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +94,11 @@
     </Compile>
     <Compile Include="RadioButtons.designer.cs">
       <DependentUpon>RadioButtons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs">
       <DependentUpon>ExpenseTrackerModel.tt</DependentUpon>
@@ -128,6 +140,9 @@
     <Compile Include="WeeklyView.Designer.cs">
       <DependentUpon>WeeklyView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EventView.resx">
+      <DependentUpon>EventView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PredictionsForm.resx">
       <DependentUpon>PredictionsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +190,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\ServiceReference1\service.wsdl" />
+    <None Include="Service References\ServiceReference1\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -194,8 +216,19 @@
       <DependentUpon>ExpenseTrackerModel.edmx</DependentUpon>
       <LastGenOutput>ExpenseTrackerModel.cs</LastGenOutput>
     </Content>
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

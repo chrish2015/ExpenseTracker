@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker", "ExpenseTracker\ExpenseTracker.csproj", "{A3460412-4556-44E0-B44A-44DEE5B36577}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6B0223FC-054E-4D58-A085-4C3AA8AAE10F} = {6B0223FC-054E-4D58-A085-4C3AA8AAE10F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTrackerWCF", "ExpenseTrackerWCF\ExpenseTrackerWCF.csproj", "{6B0223FC-054E-4D58-A085-4C3AA8AAE10F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{A3460412-4556-44E0-B44A-44DEE5B36577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3460412-4556-44E0-B44A-44DEE5B36577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3460412-4556-44E0-B44A-44DEE5B36577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0223FC-054E-4D58-A085-4C3AA8AAE10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0223FC-054E-4D58-A085-4C3AA8AAE10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0223FC-054E-4D58-A085-4C3AA8AAE10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0223FC-054E-4D58-A085-4C3AA8AAE10F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
