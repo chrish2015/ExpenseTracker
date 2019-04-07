@@ -76,6 +76,7 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(120, 69);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(202, 20);
             this.txtPassword.TabIndex = 3;
             // 
@@ -104,14 +105,17 @@
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Username";
             // 
-            // Login
+            // UserLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 197);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Login";
-            this.Text = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "UserLoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Login";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

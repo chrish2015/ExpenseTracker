@@ -23,21 +23,6 @@ namespace ExpenseTracker
             InitializeComponent();
         }
 
-        public void CreateFileWatcher(string path)
-        {
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = Application.ExecutablePath;
-            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                                            | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-            watcher.Changed += new FileSystemEventHandler(OnChanged);
-            watcher.Created += new FileSystemEventHandler(OnChanged);
-        }
-
-        private void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            FillDataTable();
-        }
-
         private void EventView_Load(object sender, EventArgs e)
         {
             dataGridEvents.AutoGenerateColumns = false;
@@ -53,8 +38,26 @@ namespace ExpenseTracker
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            ServiceReference1.EventServiceClient eventService = new EventServiceClient();
+            if (!eventHandlerBckWrk.IsBusy)
+            {
+                String textDescription = txtDesc.Text;
+                eventHandlerBckWrk.RunWorkerAsync(argument: textDescription);
+            }
+            else
+            {
+                MessageBox.Show("Backgroud worker is still busy", "Warning");
+            }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FillDataTable();
+        }
+
+        private void eventHandlerBckWrk_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string description = (string)e.Argument;
+            ServiceReference1.EventServiceClient eventService = new EventServiceClient();
             var checkedRecurringOption = rbtPanel.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
             if (checkedRecurringOption == null || txtEvent.Text.Trim() == "" || dateEvents.Text.Trim() == "")
@@ -63,13 +66,15 @@ namespace ExpenseTracker
                     MessageBoxIcon.Error);
                 return;
             }
-            eventService.SaveEvent(txtEvent.Text, txtDescription.Text, dateEvents.Text, checkedRecurringOption.Text, MainView.file);
-            dataGridEvents.DataSource = _eventController.GetEvents(MainView.file);
+            eventService.SaveEvent(txtEvent.Text, description, dateEvents.Text, checkedRecurringOption.Text, MainView.file);
+            e.Result = "Success";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void eventHandlerBckWrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            FillDataTable();
+            if (e.Result == "Success")
+                dataGridEvents.DataSource = _eventController.GetEvents(MainView.file);
+
         }
     }
 }

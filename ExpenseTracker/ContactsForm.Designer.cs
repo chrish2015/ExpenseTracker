@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericUpDownNumComp = new System.Windows.Forms.NumericUpDown();
+            this.numberOfContacts = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumComp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfContacts)).BeginInit();
             this.SuspendLayout();
             // 
-            // numericUpDownNumComp
+            // numberOfContacts
             // 
-            this.numericUpDownNumComp.Location = new System.Drawing.Point(588, 47);
-            this.numericUpDownNumComp.Maximum = new decimal(new int[] {
-            5,
+            this.numberOfContacts.Location = new System.Drawing.Point(588, 47);
+            this.numberOfContacts.Maximum = new decimal(new int[] {
+            8,
             0,
             0,
             0});
-            this.numericUpDownNumComp.Minimum = new decimal(new int[] {
+            this.numberOfContacts.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownNumComp.Name = "numericUpDownNumComp";
-            this.numericUpDownNumComp.Size = new System.Drawing.Size(53, 20);
-            this.numericUpDownNumComp.TabIndex = 0;
-            this.numericUpDownNumComp.Value = new decimal(new int[] {
+            this.numberOfContacts.Name = "numberOfContacts";
+            this.numberOfContacts.Size = new System.Drawing.Size(53, 20);
+            this.numberOfContacts.TabIndex = 0;
+            this.numberOfContacts.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -63,7 +63,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(245, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "How many contacts are you going to add (Max - 5)";
+            this.label1.Text = "How many contacts are you going to add (Max - 8)";
             // 
             // btnOk
             // 
@@ -75,18 +75,18 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.button1_Click);
             // 
-            // UserForm
+            // ContactsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDownNumComp);
+            this.Controls.Add(this.numberOfContacts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "UserForm";
+            this.Name = "ContactsForm";
             this.Text = "UserForm";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumComp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfContacts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,7 +94,7 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericUpDownNumComp;
+        private System.Windows.Forms.NumericUpDown numberOfContacts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOk;
     }

@@ -16,8 +16,7 @@ namespace ExpenseTrackerWCF
     {
         public string SaveEvent(string eventName, string details, string date, string recurring, string file)
         {
-            var t = new Thread(() => save(eventName, details, date, recurring, file));
-            t.Start();
+            save(eventName, details, date, recurring, file);
             return string.Format("Successfully Added ", eventName);
         }
 

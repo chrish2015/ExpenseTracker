@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,27 +10,34 @@ namespace ExpenseTracker
 {
     class TransactionController
     {
-        public void Save()
-        {
 
-        }
-
-        public void Save(string transactionName, int value, string description, DateTime dateTime, RadioButton checkedType, RadioButton checkedRecurringOption, Contact contact)
+        public void Save(string transactionName, int value, string description, DateTime dateTime,
+            RadioButton checkedType, RadioButton checkedRecurringOption, Contact contact, int id)
         {
             using (var dbEntities = new ExpenseTrackerDBEntities())
             {
-                dbEntities.Transactions.Add(new Transaction()
+                Transaction transaction = new Transaction()
                 {
-                    User = MainView.user,
+                    UsersId = MainView.user.Id,
+                    transactionId = id,
                     date = dateTime,
                     transactionName = transactionName,
                     description = description,
                     value = value,
                     transactionType = checkedType.Text,
                     isRecurring = checkedRecurringOption.Text,
-                    Contact = contact
+                    ContactId = contact.contactId
 
-                });
+                };
+                if (id == 0)
+                {
+                    dbEntities.Transactions.Add(transaction);
+                }
+                else
+                {
+                    dbEntities.Entry(transaction).State = EntityState.Modified;
+                }
+
                 dbEntities.SaveChanges();
             }
         }
@@ -55,7 +63,7 @@ namespace ExpenseTracker
             {
                 var dateTime = DateTime.Now.AddDays(-31);
                 var todayDateTime = DateTime.Now;
-                return dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime ).ToList<Transaction>();
+                return dbEntities.Transactions.Where(r => todayDateTime > r.date && r.date > dateTime).ToList<Transaction>();
 
             }
         }

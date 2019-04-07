@@ -47,7 +47,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancle = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.datePickerTransactions = new System.Windows.Forms.DateTimePicker();
@@ -226,7 +225,7 @@
             // 
             // btnCancle
             // 
-            this.btnCancle.Location = new System.Drawing.Point(243, 424);
+            this.btnCancle.Location = new System.Drawing.Point(197, 424);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(75, 23);
             this.btnCancle.TabIndex = 11;
@@ -234,18 +233,9 @@
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(139, 424);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 12;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(29, 424);
+            this.btnSubmit.Location = new System.Drawing.Point(82, 424);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 13;
@@ -371,7 +361,6 @@
             this.Controls.Add(this.pnlRecurring);
             this.Controls.Add(this.datePickerTransactions);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtValue);
@@ -406,7 +395,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCancle;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker datePickerTransactions;
