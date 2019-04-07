@@ -59,7 +59,7 @@ namespace ExpenseTracker
         {
 
             this.pnlMain.Controls.Clear();
-            btnGneerate predictionsForm = new btnGneerate();
+            PredictionsView predictionsForm = new PredictionsView();
             predictionsForm.TopLevel = false;
             predictionsForm.AutoScroll = true;
             this.pnlMain.Controls.Add(predictionsForm);

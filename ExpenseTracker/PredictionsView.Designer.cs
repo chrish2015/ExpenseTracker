@@ -1,6 +1,6 @@
 ﻿namespace ExpenseTracker
 {
-    partial class btnGneerate
+    partial class PredictionsView
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,7 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Select the date for Prediction";
             // 
-            // btnGneerate
+            // PredictionsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +104,7 @@
             this.Controls.Add(this.lblPrediction);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "btnGneerate";
+            this.Name = "PredictionsView";
             this.Text = "PredictionsForm";
             this.ResumeLayout(false);
             this.PerformLayout();

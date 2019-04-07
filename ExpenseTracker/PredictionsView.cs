@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace ExpenseTracker
 {
-    public partial class btnGneerate : Form
+    public partial class PredictionsView : Form
     {
-        PredictionController _controller=new PredictionController();
-        public btnGneerate()
+        private readonly PredictionController _controller=new PredictionController();
+        public PredictionsView()
         {
             InitializeComponent();
         }
