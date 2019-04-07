@@ -58,27 +58,29 @@ namespace ExpenseTracker
             var checkedRecurringOption = pnlRecurring.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
             Contact contact = (Contact)cmbBoxContacts.SelectedItem;
-
-            _transactionController.Save(txtName.Text, Int32.Parse(txtValue.Text), txtDescription.Text, datePickerTransactions.Value,
-                checkedType, checkedRecurringOption, contact);
+            if (txtName.Text.Trim() != "" && txtValue.Text.Trim() != "" && txtDescription.Text.Trim() != "" && checkedType != null && checkedRecurringOption != null && contact != null)
+                _transactionController.Save(txtName.Text, Int32.Parse(txtValue.Text), txtDescription.Text, datePickerTransactions.Value,
+                    checkedType, checkedRecurringOption, contact);
+            else
+                MessageBox.Show("Please data into all the fields", "Errors", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             PopulateTransactionsDataGridView();
         }
 
         private void txtValue_Validating(object sender, CancelEventArgs e)
         {
-            string value;
-            NumberStyles style;
-            CultureInfo culture;
-            decimal currency;
+            string txtValueText;
+            NumberStyles numberStyles;
+            CultureInfo cultureInfo;
+            decimal result;
 
-            value = txtValue.Text;
-            style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
-            culture = CultureInfo.CreateSpecificCulture("en-US");
-            if (!Decimal.TryParse(value, style, culture, out currency))
+            txtValueText = txtValue.Text;
+            numberStyles = NumberStyles.AllowCurrencySymbol | NumberStyles.Number;
+            cultureInfo = CultureInfo.CreateSpecificCulture("en-US");
+            if (!Decimal.TryParse(txtValueText, numberStyles, cultureInfo, out result))
             {
-                MessageBox.Show("Please enter a valid currency amount.", "Invalid Value", MessageBoxButtons.OK,
+                MessageBox.Show("Please enter a valid currency amount.", "Invalid Amount", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                // prevent the textbox from losing focus
                 e.Cancel = true;
             }
         }
@@ -119,7 +121,7 @@ namespace ExpenseTracker
                 int contactId = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["contactId"].Value);
                 using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
                 {
-                    transaction = _transactionController.getTransaction(dbEntities, transaction);
+                    transaction = _transactionController.GetTransaction(dbEntities, transaction);
                     txtName.Text = transaction.transactionName;
                     txtDescription.Text = transaction.description;
                     txtValue.Text = transaction.value.ToString();

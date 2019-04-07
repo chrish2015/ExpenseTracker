@@ -13,13 +13,13 @@ namespace ExpenseTracker
     public partial class MainView : Form
     {
         public static User user;
-        private Button lastButton;
+        private Button _lastButton;
         public static string file;
         public MainView(User user)
         {
             InitializeComponent();
             MainView.user = user;
-            lastButton = btnTransactions;
+            _lastButton = btnTransactions;
             DisplayTransactionForm();
             ColourButton(btnTransactions);
             string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
@@ -103,9 +103,9 @@ namespace ExpenseTracker
 
         private void ColourButton(Button button)
         {
-            lastButton.BackColor = DefaultBackColor;
+            _lastButton.BackColor = DefaultBackColor;
             button.BackColor = Color.Aqua;
-            lastButton = button;
+            _lastButton = button;
         }
         private void btnExitProgram_Click(object sender, FormClosedEventArgs e)
         {

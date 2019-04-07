@@ -9,9 +9,18 @@ namespace ExpenseTracker
 {
     class EventController
     {
-        public List<dynamic> getEvents(String file)
+        public List<dynamic> GetEvents(String file)
         {
-            XDocument document = XDocument.Load(file);
+
+            XDocument document;
+            try
+            {
+             document = XDocument.Load(file);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
             var particularStudent = from xml in document.Descendants("Event")
                                     select new
                                     {
@@ -23,7 +32,7 @@ namespace ExpenseTracker
             return particularStudent.ToList<dynamic>();
         }
 
-        public List<dynamic> getWeeklyEvents(String file)
+        public List<dynamic> GetWeeklyEvents(String file)
         {
             var dateTime = DateTime.Now.AddDays(-7);
             var todayDateTime = DateTime.Now;

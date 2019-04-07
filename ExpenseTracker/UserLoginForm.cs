@@ -24,16 +24,15 @@ namespace ExpenseTracker
             String username = txtUsername.Text;
             String password = txtPassword.Text;
             UserController userController = new UserController();
-            User user = userController.VerifyLogin(username, password);
-            if (user != null)
+            bool user = userController.VerifyLogin(username, password);
+            if (user == true)
             {
-                MainView mainView = new MainView(user);
-                mainView.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Wrong Username Or Password", "Error");
+                MessageBox.Show("Wrong Username Or Password", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -15,8 +16,9 @@ namespace ExpenseTrackerWCF
     {
         public string SaveEvent(string eventName, string details, string date, string recurring, string file)
         {
-            save(eventName, details, date, recurring, file);
-            return string.Format("You entered: {0}", eventName);
+            var t = new Thread(() => save(eventName, details, date, recurring, file));
+            t.Start();
+            return string.Format("Successfully Added ", eventName);
         }
 
         private void save(string eventName, string details, string date, string recurring, string file)

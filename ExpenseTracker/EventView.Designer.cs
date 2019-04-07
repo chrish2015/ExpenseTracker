@@ -45,6 +45,7 @@
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsRecurring = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.rbtPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEvents)).BeginInit();
@@ -62,14 +63,14 @@
             this.groupBox1.Controls.Add(this.txtEvent);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1116, 133);
+            this.groupBox1.Size = new System.Drawing.Size(1037, 133);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add  Event";
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(964, 42);
+            this.btnSubmit.Location = new System.Drawing.Point(933, 42);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 49);
             this.btnSubmit.TabIndex = 7;
@@ -214,11 +215,22 @@
             this.IsRecurring.Name = "IsRecurring";
             this.IsRecurring.ReadOnly = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1055, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 105);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Refresh Table";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EventView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridEvents);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -252,5 +264,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsRecurring;
+        private System.Windows.Forms.Button button1;
     }
 }

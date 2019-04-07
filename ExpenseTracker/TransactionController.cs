@@ -34,12 +34,12 @@ namespace ExpenseTracker
             }
         }
 
-        public Transaction getTransaction(ExpenseTrackerDBEntities dbEntities, Transaction transaction)
+        public Transaction GetTransaction(ExpenseTrackerDBEntities dbEntities, Transaction transaction)
         {
             return dbEntities.Transactions.Where(x => x.transactionId == transaction.transactionId).FirstOrDefault();
         }
 
-        public List<dynamic> getWeeklyExpenses()
+        public List<dynamic> GetWeeklyExpenses()
         {
             using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
             {
@@ -49,7 +49,7 @@ namespace ExpenseTracker
 
             }
         }
-        public List<Transaction> getMonthlyExpenses()
+        public List<Transaction> GetMonthlyExpenses()
         {
             using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
             {

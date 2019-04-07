@@ -86,11 +86,11 @@
       <DependentUpon>ExpenseTrackerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="PredictionController.cs" />
-    <Compile Include="PredictionsForm.cs">
+    <Compile Include="PredictionsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PredictionsForm.Designer.cs">
-      <DependentUpon>PredictionsForm.cs</DependentUpon>
+    <Compile Include="PredictionsView.Designer.cs">
+      <DependentUpon>PredictionsView.cs</DependentUpon>
     </Compile>
     <Compile Include="RadioButtons.cs">
       <SubType>UserControl</SubType>
@@ -152,8 +152,8 @@
     <EmbeddedResource Include="EventView.resx">
       <DependentUpon>EventView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PredictionsForm.resx">
-      <DependentUpon>PredictionsForm.cs</DependentUpon>
+    <EmbeddedResource Include="PredictionsView.resx">
+      <DependentUpon>PredictionsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RadioButtons.resx">
       <DependentUpon>RadioButtons.cs</DependentUpon>

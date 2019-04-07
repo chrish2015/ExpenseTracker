@@ -21,8 +21,9 @@ namespace ExpenseTracker
 
         private void btnGeneratePrd_Click(object sender, EventArgs e)
         {
-            int predictedValue=_controller.predictExpense();
-           
+            DateTime dateTime=dateTimePicker1.Value;
+            int predictedValue=_controller.CalculatePredictions(dateTime);
+            
             lblPrediction.Text = predictedValue.ToString();
             lblPrediction.Visible = true;
         }

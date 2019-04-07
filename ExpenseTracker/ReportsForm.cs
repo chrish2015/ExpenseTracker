@@ -23,7 +23,7 @@ namespace ExpenseTracker
         {
             int expense = 0;
             int income = 0;
-            var transactions = _transactionController.getMonthlyExpenses();
+            var transactions = _transactionController.GetMonthlyExpenses();
             foreach (var transaction in transactions)
             {
                 if (transaction.transactionType == "Expense")
@@ -35,10 +35,10 @@ namespace ExpenseTracker
                     income += transaction.value;
                 }
             }
-            DrawPieChart(income, expense);
+            GenerateReport(income, expense);
         }
 
-        private void DrawPieChart(int income, int expenses)
+        private void GenerateReport(int income, int expenses)
         {
             expenseChart.Series.Clear();
             expenseChart.Legends.Clear();

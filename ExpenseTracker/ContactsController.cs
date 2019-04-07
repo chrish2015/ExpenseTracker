@@ -19,7 +19,8 @@ namespace ExpenseTracker
                     .FirstOrDefault(r => r.Checked);
                 if (contact.Trim() == "" || checkedType == null)
                 {
-                    MessageBox.Show("Please fill all the fields for contact : " + (i + 1), "Error");
+                    MessageBox.Show(@"Please fill all the fields for contact : " + (i + 1), @"Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     return;
                 }
 
@@ -33,7 +34,7 @@ namespace ExpenseTracker
                     dbEntities.SaveChanges();
                 }
             }
-            MessageBox.Show("Contacts Are Successfully Added");
+            MessageBox.Show(@"Contacts Are Successfully Added", @"Success", MessageBoxButtons.OK);
         }
     }
 }

@@ -22,10 +22,10 @@ namespace ExpenseTracker
         public void PopulateTransactionsDataGridView()
         {
             dataGridWeeklyView.AutoGenerateColumns = false;
-            dataGridWeeklyView.DataSource = _transactionController.getWeeklyExpenses();
+            dataGridWeeklyView.DataSource = _transactionController.GetWeeklyExpenses();
 
             dataGridEventsWeely.AutoGenerateColumns = false;
-            dataGridEventsWeely.DataSource = _eventController.getWeeklyEvents(MainView.file);
+            dataGridEventsWeely.DataSource = _eventController.GetWeeklyEvents(MainView.file);
 
         }
 
