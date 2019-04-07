@@ -17,7 +17,7 @@ namespace ExpenseTracker
 {
     public partial class EventView : Form
     {
-        EventController eventController=new EventController();
+        private readonly EventController _eventController=new EventController();
         public EventView()
         {
             InitializeComponent();
@@ -28,17 +28,22 @@ namespace ExpenseTracker
         {
           
             dataGridEvents.AutoGenerateColumns = false;
-            dataGridEvents.DataSource = eventController.getEvents(MainView.file);
+            dataGridEvents.DataSource = _eventController.getEvents(MainView.file);
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             ServiceReference1.EventServiceClient eventService = new EventServiceClient();
+
             var checkedRecurringOption = rbtPanel.Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
-
+            if (checkedRecurringOption == null || txtEvent.Text.Trim() == "" || dateEvents.Text.Trim() == "")
+            {
+                MessageBox.Show("Please enter reqired fields", "Error");
+                return;
+            }
             eventService.SaveEvent(txtEvent.Text, txtDescription.Text, dateEvents.Text, checkedRecurringOption.Text, MainView.file);
-            dataGridEvents.DataSource = eventController.getEvents(MainView.file);
+            dataGridEvents.DataSource = _eventController.getEvents(MainView.file);
         }
 
     }

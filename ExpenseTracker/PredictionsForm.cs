@@ -18,10 +18,6 @@ namespace ExpenseTracker
             InitializeComponent();
         }
 
-        private void PredictionsForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnGeneratePrd_Click(object sender, EventArgs e)
         {

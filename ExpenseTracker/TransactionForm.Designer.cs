@@ -85,7 +85,6 @@
             this.dataGridTransactions.ReadOnly = true;
             this.dataGridTransactions.Size = new System.Drawing.Size(791, 497);
             this.dataGridTransactions.TabIndex = 0;
-            this.dataGridTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTransactions_CellContentClick);
             this.dataGridTransactions.Click += new System.EventHandler(this.income_Clicked);
             this.dataGridTransactions.DoubleClick += new System.EventHandler(this.dataGridTransactions_DoubleClick);
             // 
@@ -171,7 +170,6 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -181,7 +179,6 @@
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Date";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtName
             // 
@@ -271,7 +268,6 @@
             this.datePickerTransactions.Name = "datePickerTransactions";
             this.datePickerTransactions.Size = new System.Drawing.Size(236, 20);
             this.datePickerTransactions.TabIndex = 20;
-            this.datePickerTransactions.ValueChanged += new System.EventHandler(this.datePickerTransactions_ValueChanged);
             // 
             // pnlRecurring
             // 

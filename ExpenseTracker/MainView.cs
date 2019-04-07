@@ -54,12 +54,6 @@ namespace ExpenseTracker
             ColourButton((Button)sender);
         }
 
-        private void ColourButton(Button button)
-        {
-            lastButton.BackColor = DefaultBackColor;
-            button.BackColor = Color.Aqua;
-            lastButton = button;
-        }
 
         private void btnPredictions_Click(object sender, EventArgs e)
         {
@@ -84,12 +78,6 @@ namespace ExpenseTracker
             ColourButton((Button)sender);
         }
 
-        private void btnExitProgram_Click(object sender, FormClosedEventArgs e)
-        {
-
-            Application.Exit();
-        }
-
         private void btnEvents_Click(object sender, EventArgs e)
         {
             this.pnlMain.Controls.Clear();
@@ -100,10 +88,29 @@ namespace ExpenseTracker
             eventView.Show();
             ColourButton((Button)sender);
         }
+        
 
-        private void MainView_Load(object sender, EventArgs e)
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            this.pnlMain.Controls.Clear();
+            ReportsForm reports = new ReportsForm();
+            reports.TopLevel = false;
+            reports.AutoScroll = true;
+            this.pnlMain.Controls.Add(reports);
+            reports.Show();
+            ColourButton((Button)sender);
+        }
+
+        private void ColourButton(Button button)
+        {
+            lastButton.BackColor = DefaultBackColor;
+            button.BackColor = Color.Aqua;
+            lastButton = button;
+        }
+        private void btnExitProgram_Click(object sender, FormClosedEventArgs e)
         {
 
+            Application.Exit();
         }
     }
 }

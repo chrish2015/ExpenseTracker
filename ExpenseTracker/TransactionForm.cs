@@ -15,24 +15,15 @@ namespace ExpenseTracker
 {
     public partial class TransactionForm : Form
     {
-        TransactionController transactionController = new TransactionController();
-        private List<Contact> payees;
-        private List<Contact> payers;
+        private readonly TransactionController _transactionController = new TransactionController();
+        private List<Contact> _payees;
+        private List<Contact> _payers;
 
         public TransactionForm()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
@@ -43,8 +34,8 @@ namespace ExpenseTracker
         {
             using (var dbEntity = new ExpenseTrackerDBEntities())
             {
-                payers = dbEntity.Contacts.Where(r => r.contactType == "Payer").ToList<Contact>();
-                payees = dbEntity.Contacts.Where(r => r.contactType == "Payee").ToList<Contact>();
+                _payers = dbEntity.Contacts.Where(r => r.contactType == "Payer").ToList<Contact>();
+                _payees = dbEntity.Contacts.Where(r => r.contactType == "Payee").ToList<Contact>();
             }
 
 
@@ -68,7 +59,7 @@ namespace ExpenseTracker
                 .FirstOrDefault(r => r.Checked);
             Contact contact = (Contact)cmbBoxContacts.SelectedItem;
 
-            transactionController.Save(txtName.Text, Int32.Parse(txtValue.Text), txtDescription.Text, datePickerTransactions.Value,
+            _transactionController.Save(txtName.Text, Int32.Parse(txtValue.Text), txtDescription.Text, datePickerTransactions.Value,
                 checkedType, checkedRecurringOption, contact);
             PopulateTransactionsDataGridView();
         }
@@ -128,7 +119,7 @@ namespace ExpenseTracker
                 int contactId = Convert.ToInt32(dataGridTransactions.CurrentRow.Cells["contactId"].Value);
                 using (ExpenseTrackerDBEntities dbEntities = new ExpenseTrackerDBEntities())
                 {
-                    transaction = transactionController.getTransaction(dbEntities, transaction);
+                    transaction = _transactionController.getTransaction(dbEntities, transaction);
                     txtName.Text = transaction.transactionName;
                     txtDescription.Text = transaction.description;
                     txtValue.Text = transaction.value.ToString();
@@ -144,7 +135,7 @@ namespace ExpenseTracker
                     if (transaction.transactionType == "Income")
                     {
                         btnIncome.Checked = true;
-                        int index = payers.IndexOf(payers.Find(r => r.contactId == contactId));
+                        int index = _payers.IndexOf(_payers.Find(r => r.contactId == contactId));
                         income_Combo();
                         cmbBoxContacts.SelectedIndex = index;
 
@@ -152,7 +143,7 @@ namespace ExpenseTracker
                     else if (transaction.transactionType == "Expense")
                     {
                         btnExpense.Checked = true;
-                        int index = payees.IndexOf(payees.Find(r => r.contactId == contactId));
+                        int index = _payees.IndexOf(_payees.Find(r => r.contactId == contactId));
                         expense_Combo();
                         cmbBoxContacts.SelectedIndex = index;
                     }
@@ -165,11 +156,6 @@ namespace ExpenseTracker
             }
         }
 
-        private void datePickerTransactions_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void expense_Checked(object sender, EventArgs e)
         {
             expense_Combo();
@@ -178,7 +164,7 @@ namespace ExpenseTracker
         private void expense_Combo()
         {
             lblContact.Text = "Payee";
-            cmbBoxContacts.DataSource = payees;
+            cmbBoxContacts.DataSource = _payees;
             cmbBoxContacts.DisplayMember = "contactName";
         }
 
@@ -191,13 +177,9 @@ namespace ExpenseTracker
         private void income_Combo()
         {
             lblContact.Text = "Payer";
-            cmbBoxContacts.DataSource = payers;
+            cmbBoxContacts.DataSource = _payers;
             cmbBoxContacts.DisplayMember = "contactName";
         }
 
-        private void dataGridTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

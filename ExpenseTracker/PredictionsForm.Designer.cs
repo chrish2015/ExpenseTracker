@@ -32,12 +32,14 @@
             this.lblPrediction = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnGeneratePrd = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(508, 55);
+            this.label1.Location = new System.Drawing.Point(503, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 0;
@@ -65,6 +67,7 @@
             // 
             // btnGeneratePrd
             // 
+            this.btnGeneratePrd.ForeColor = System.Drawing.SystemColors.Highlight;
             this.btnGeneratePrd.Location = new System.Drawing.Point(521, 377);
             this.btnGeneratePrd.Name = "btnGeneratePrd";
             this.btnGeneratePrd.Size = new System.Drawing.Size(83, 59);
@@ -73,11 +76,29 @@
             this.btnGeneratePrd.UseVisualStyleBackColor = true;
             this.btnGeneratePrd.Click += new System.EventHandler(this.btnGeneratePrd_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(458, 153);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(490, 126);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Select the date for Prediction";
+            // 
             // btnGneerate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 521);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnGeneratePrd);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblPrediction);
@@ -85,7 +106,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "btnGneerate";
             this.Text = "PredictionsForm";
-            this.Load += new System.EventHandler(this.PredictionsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,5 +117,7 @@
         private System.Windows.Forms.Label lblPrediction;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnGeneratePrd;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label2;
     }
 }
